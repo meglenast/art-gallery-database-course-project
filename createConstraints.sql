@@ -5,6 +5,12 @@ ALTER TABLE artist
 	ADD CONSTRAINT 	pk_artist 	PRIMARY KEY(id_artist);
 
 ALTER TABLE artist
+	ADD CONSTRAINT ch_artist_first_name CHECK(first_name SIMILAR TO '[A-Z][a-z]+');
+
+ALTER TABLE artist
+	ADD CONSTRAINT ch_artist_last_name CHECK(first_name SIMILAR TO '[A-Z][a-z]+');
+
+ALTER TABLE artist
 	ADD CONSTRAINT ch_artist_date_of_death CHECK(EXTRACT(YEAR  FROM date_of_death) > EXTRACT(YEAR FROM date_of_birth));
 
 ALTER TABLE artist
@@ -16,19 +22,18 @@ ALTER TABLE customer
 	ADD CONSTRAINT pk_customer PRIMARY KEY(id_customer);
 	
 ALTER TABLE customer
-	ADD CONSTRAINT ch_customer_passwd CHECK(passwd LIKE '%[0-9]%' AND 
-									        passwd LIKE '%[A-Z]%' AND 
-									        passwd LIKE  '%[!@#$%a^&*()-_+=.,;:]%');
-											
+	ADD CONSTRAINT ch_customer_passwd CHECK(passwd SIMILAR TO '%[0-9]%' AND 
+									        passwd SIMILAR TO '%[A-Z]%' );
+						
 ALTER TABLE customer
-	ADD CONSTRAINT ch_customer_first_name CHECK(first_name LIKE '[A-Z]%');
+	ADD CONSTRAINT ch_customer_first_name CHECK(first_name SIMILAR TO '[A-Z][a-z]+');
 
 ALTER TABLE customer
-	ADD CONSTRAINT ch_customer_last_name CHECK(first_name LIKE '[A-Z]%');
+	ADD CONSTRAINT ch_customer_last_name CHECK(first_name SIMILAR TO '[A-Z][a-z]+');
 
 ALTER TABLE customer 
-	ADD CONSTRAINT ch_customer_phone CHECK(phone LIKE '+[0-9]%' OR
-											phone LIKE '[0-9]%')
+	ADD CONSTRAINT ch_customer_phone CHECK(phone SIMILAR TO '\+[0-9]+' OR
+										   phone SIMILAR TO '[0-9]+');
 											 
 ALTER TABLE customer
 	ADD CONSTRAINT ch_customer_email CHECK(email LIKE '%_@%_.%_');
@@ -53,10 +58,10 @@ ALTER TABLE payment
 	ADD CONSTRAINT 	pk_payment PRIMARY KEY(cardNo);
 	
 ALTER TABLE payment
-	ADD CONSTRAINT ch_payment_owner_firstname CHECK(owner_firstname LIKE '[A-Z]%');
+	ADD CONSTRAINT ch_payment_owner_firstname CHECK(owner_firstname SIMILAR TO '[A-Z][a-z]+%');
 
 ALTER TABLE payment
-	ADD CONSTRAINT ch_payment_owner_lastname CHECK(owner_lastname LIKE '[A-Z]%');
+	ADD CONSTRAINT ch_payment_owner_lastname CHECK(owner_lastname SIMILAR TO '[A-Z][a-z]+%');
 
 --exhibition
 ALTER TABLE exhibition
