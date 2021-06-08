@@ -39,7 +39,6 @@ ALTER TABLE customer
 	ADD CONSTRAINT ch_customer_email CHECK(email LIKE '%_@%_.%_');
 
 --shopping_cart
-
 ALTER TABLE shopping_cart
 	ADD CONSTRAINT 	pk_shopping_cart PRIMARY KEY(id_cart);
 
@@ -53,7 +52,6 @@ ALTER TABLE shopping_cart
 	ADD CONSTRAINT ch_shopping_cart_price CHECK(total_price >= 0);
 
 --payment
-
 ALTER TABLE payment
 	ADD CONSTRAINT 	pk_payment PRIMARY KEY(cardNo);
 	
@@ -78,16 +76,12 @@ ALTER TABLE exhibition_hall
     ADD CONSTRAINT pk_exhibition_hall PRIMARY KEY (id_hall);
 
 ALTER TABLE exhibition_hall
-	ADD CONSTRAINT 	fk_exhibition_hall FOREIGN KEY(id_exhibition) REFERENCES exhibition(id_exhibition);
-
-ALTER TABLE exhibition_hall
 	ADD CONSTRAINT 	ch_exhibition_hall_floor CHECK(floor >= -1 AND floor <= 4);
 	
 ALTER TABLE exhibition_hall
 	ADD CONSTRAINT 	ch_exhibition_capacity CHECK(capacity >0);
 
 --ticket
-
 ALTER TABLE ticket
     ADD CONSTRAINT pk_ticket PRIMARY KEY (id_ticket);
 	
@@ -101,7 +95,6 @@ ALTER TABLE ticket
 	ADD CONSTRAINT 	ch_ticket_type CHECK(type IN (N'adult', N'child', N'student', N'elder'));
 	
 --orders
-
 ALTER TABLE orders
     ADD CONSTRAINT pk_orders PRIMARY KEY (id_order);
 	
@@ -117,16 +110,12 @@ ALTER TABLE orders
 ALTER TABLE orders
 	ADD CONSTRAINT 	ch_orders_status CHECK(status IN (N'completed', N'declined'));
 		
- --paintings
- 
+ --painting 
 ALTER TABLE painting
     ADD CONSTRAINT pk_painting PRIMARY KEY (id_painting);
 	
 ALTER TABLE painting
 	ADD CONSTRAINT 	fk_painting_id_artist FOREIGN KEY(id_artist) REFERENCES artist(id_artist);
-
-ALTER TABLE painting
-	ADD CONSTRAINT 	fk_painting_id_hall FOREIGN KEY(id_hall) REFERENCES exhibition_hall(id_hall);
 	
 ALTER TABLE painting
 	ADD CONSTRAINT 	ch_painting_technique CHECK(drawing_technique IN (N'oil', N'acryl', N'water colour', N'sketch', N'graphic'));
@@ -175,7 +164,7 @@ ALTER TABLE portrait_art
 ALTER TABLE history_painting
     ADD CONSTRAINT pk_history_painting PRIMARY KEY (id_painting);
 	
-ALTER TABLE portrait_art
+ALTER TABLE history_painting
     ADD CONSTRAINT fk_history_painting FOREIGN KEY (id_painting) REFERENCES painting(id_painting);
 
 --painting_shoppingcart
@@ -187,3 +176,16 @@ ALTER TABLE painting_shoppingcart
 	
 ALTER TABLE painting_shoppingcart
     ADD CONSTRAINT fk_painting_shoppingcart_id_cart FOREIGN KEY (id_cart) REFERENCES shopping_cart(id_cart);	
+
+--exhibition_hall_painting
+ALTER TABLE exhibition_hall_painting
+	ADD CONSTRAINT pk_exhibition_hall_painting PRIMARY KEY (id);
+
+ALTER TABLE exhibition_hall_painting
+	ADD CONSTRAINT fk_exhibition_hall_painting_painting  FOREIGN KEY (id_painting) REFERENCES painting(id_painting);
+
+ALTER TABLE exhibition_hall_painting
+	ADD CONSTRAINT fk_exhibition_hall_painting_hall  FOREIGN KEY (id_hall) REFERENCES exhibition_hall(id_hall);
+
+ALTER TABLE exhibition_hall_painting
+	ADD CONSTRAINT fk_exhibition_hall_painting_exhibition  FOREIGN KEY (id_exhibition) REFERENCES exhibition(id_exhibition);

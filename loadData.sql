@@ -62,16 +62,16 @@ insert into exhibition (name_exhibition, date_starting, date_ending, price_ticke
 insert into exhibition (name_exhibition, date_starting, date_ending, price_ticket) values ('dapibus', '2020-08-15', '2021-05-27', 52.99);
 
 --exhibition_hall
-insert into exhibition_hall (id_exhibition, floor, capacity) values (1000, 1, 13);
-insert into exhibition_hall (id_exhibition, floor, capacity) values (1003, 0, 12);
-insert into exhibition_hall (id_exhibition, floor, capacity) values (1004, 2, 14);
-insert into exhibition_hall (id_exhibition, floor, capacity) values (1005, 2, 8);
-insert into exhibition_hall (id_exhibition, floor, capacity) values (1004, 0, 1);
-insert into exhibition_hall (id_exhibition, floor, capacity) values (1000, 3, 8);
-insert into exhibition_hall (id_exhibition, floor, capacity) values (1003, 1, 6);
-insert into exhibition_hall (id_exhibition, floor, capacity) values (1003, 3, 16);
-insert into exhibition_hall (id_exhibition, floor, capacity) values (1005, 1, 6);
-insert into exhibition_hall (id_exhibition, floor, capacity) values (1006, 2, 5);
+insert into exhibition_hall (floor, capacity) values (1, 13);
+insert into exhibition_hall (floor, capacity) values (0, 12);
+insert into exhibition_hall (floor, capacity) values (2, 14);
+insert into exhibition_hall (floor, capacity) values (2, 8);
+insert into exhibition_hall (floor, capacity) values (0, 1);
+insert into exhibition_hall (floor, capacity) values (3, 8);
+insert into exhibition_hall (floor, capacity) values (1, 6);
+insert into exhibition_hall (floor, capacity) values (3, 16);
+insert into exhibition_hall (floor, capacity) values (1, 6);
+insert into exhibition_hall (floor, capacity) values (2, 5);
 
 --ticket
 insert into ticket (id_exhibition, date, type) values (1000, '2020-12-28', N'adult');
@@ -110,32 +110,32 @@ insert into orders (cardNo, id_cart, ord_date, status) values ('358146446840', 9
 insert into orders (cardNo, id_cart, ord_date, status) values ('560222046426', 10, '2020-08-13', N'completed');
 
 --painting
-insert into painting (id_artist, id_hall, title, year_painted, width, height, drawing_technique, price_sell, price_bought, number_copies, type_painting) values 
-	(1000, 1000, 'non velit donec', '1970-04-11', 86, 55.5, N'oil', 21045979.19, 43458094.75, 2, N'reproduction');
-insert into painting (id_artist, id_hall, title, year_painted, width, height, drawing_technique, price_sell, price_bought, number_copies, type_painting) values 
-	(1002, 1000, 'augue a suscipit', '1965-01-10', 86, 55.5, N'oil', null, 72155798.03, 3, N'reproduction');
-insert into painting (id_artist, id_hall, title, year_painted, width, height, drawing_technique, price_sell, price_bought, number_copies, type_painting) values 
-	(1003, 1002, 'vehicula consequat morbi', '1965-01-10', 86, 55.5, N'acryl', 67386132.13, 61720208.37, 6, N'print');
-insert into painting (id_artist, id_hall, title, year_painted, width, height, drawing_technique, price_sell, price_bought, number_copies, type_painting) values 
-	(1004, 1003, 'aenean fermentum', '1991-07-31', 86, 55.5, N'oil', 47005917.38, 61102821.58, 3, N'reproduction');
-insert into painting (id_artist, id_hall, title, year_painted, width, height, drawing_technique, price_sell, price_bought, number_copies, type_painting) values 
-	(1005, 1000, 'vulputate', null, 86, 55.5, N'acryl', 68210849.62, 36597531.20, 6, N'print');
-insert into painting (id_artist, id_hall, title, year_painted, width, height, drawing_technique, price_sell, price_bought, number_copies, type_painting) values 
-	(1006, 1005, 'donec dapibus duis', null, 86, 55.5, N'acryl', 34913898.00, 6854079.27, 4, N'reproduction');
-insert into painting (id_artist, id_hall, title, year_painted, width, height, drawing_technique, price_sell, price_bought, number_copies, type_painting) values 
-	(1007, 1002, 'ut at dolor quis', null, 86, 55.5, N'acryl', 6890810.86, 25855014.50, 4, N'reproduction');
-insert into painting (id_artist, id_hall, title, year_painted, width, height, drawing_technique, price_sell, price_bought, number_copies, type_painting) values 
-	(1008, 1000, 'at ipsum ac tellus', null, 86, 55.5, N'sketch', 69039674.83, 33758576.76, 1, N'original');
-insert into painting (id_artist, id_hall, title, year_painted, width, height, drawing_technique, price_sell, price_bought, number_copies, type_painting) values 
-	(1009, 1003, 'integer tincidunt ante vel', null, 86, 55.5, N'sketch', 41484145.02, 24774960.87, 1, N'original');
-insert into painting (id_artist, id_hall, title, year_painted, width, height, drawing_technique, price_sell, price_bought, number_copies, type_painting) values 
-	(1001, 1001, 'amet lobortis', null, 86, 55.5, N'graphic', 400, 416, 2, N'reproduction');
-insert into painting (id_artist, id_hall, title, year_painted, width, height, drawing_technique, price_sell, price_bought, number_copies, type_painting) values 
-	(1002, 1005, 'nunc', '1954-01-10', 86, 55.5, N'graphic', 45603792.82, 91293091.72, 6, N'print');
-insert into painting (id_artist, id_hall, title, year_painted, width, height, drawing_technique, price_sell, price_bought, number_copies, type_painting) values 
-	(1003, 1003, 'eu interdum eu tincidunt', '1959-01-10', 86, 55.5, N'graphic', null, 1712789.50, 1, N'original');
-insert into painting (id_artist, id_hall, title, year_painted, width, height, drawing_technique, price_sell, price_bought, number_copies, type_painting) values 
-	(1004, 1002, 'integer aliquet massa', '1992-03-31', 86, 55.5, N'graphic', 32426983.29, 29875392.18, 6, N'original');
+insert into painting (id_artist, title, year_painted, width, height, drawing_technique, price_sell, price_bought, number_copies, type_painting) values 
+	(1000, 'non velit donec', '1970-04-11', 86, 55.5, N'oil', 21045979.19, 43458094.75, 2, N'reproduction');
+insert into painting (id_artist, title, year_painted, width, height, drawing_technique, price_sell, price_bought, number_copies, type_painting) values 
+	(1002, 'augue a suscipit', '1965-01-10', 86, 55.5, N'oil', null, 72155798.03, 3, N'reproduction');
+insert into painting (id_artist, title, year_painted, width, height, drawing_technique, price_sell, price_bought, number_copies, type_painting) values 
+	(1003, 'vehicula consequat morbi', '1965-01-10', 86, 55.5, N'acryl', 67386132.13, 61720208.37, 6, N'print');
+insert into painting (id_artist, title, year_painted, width, height, drawing_technique, price_sell, price_bought, number_copies, type_painting) values 
+	(1004, 'aenean fermentum', '1991-07-31', 86, 55.5, N'oil', 47005917.38, 61102821.58, 3, N'reproduction');
+insert into painting (id_artist, title, year_painted, width, height, drawing_technique, price_sell, price_bought, number_copies, type_painting) values 
+	(1005, 'vulputate', null, 86, 55.5, N'acryl', 68210849.62, 36597531.20, 6, N'print');
+insert into painting (id_artist, title, year_painted, width, height, drawing_technique, price_sell, price_bought, number_copies, type_painting) values 
+	(1006, 'donec dapibus duis', null, 86, 55.5, N'acryl', 34913898.00, 6854079.27, 4, N'reproduction');
+insert into painting (id_artist, title, year_painted, width, height, drawing_technique, price_sell, price_bought, number_copies, type_painting) values 
+	(1007, 'ut at dolor quis', null, 86, 55.5, N'acryl', 6890810.86, 25855014.50, 4, N'reproduction');
+insert into painting (id_artist, title, year_painted, width, height, drawing_technique, price_sell, price_bought, number_copies, type_painting) values 
+	(1008, 'at ipsum ac tellus', null, 86, 55.5, N'sketch', 69039674.83, 33758576.76, 1, N'original');
+insert into painting (id_artist, title, year_painted, width, height, drawing_technique, price_sell, price_bought, number_copies, type_painting) values 
+	(1009, 'integer tincidunt ante vel', null, 86, 55.5, N'sketch', 41484145.02, 24774960.87, 1, N'original');
+insert into painting (id_artist, title, year_painted, width, height, drawing_technique, price_sell, price_bought, number_copies, type_painting) values 
+	(1001, 'amet lobortis', null, 86, 55.5, N'graphic', 400, 416, 2, N'reproduction');
+insert into painting (id_artist, title, year_painted, width, height, drawing_technique, price_sell, price_bought, number_copies, type_painting) values 
+	(1002, 'nunc', '1954-01-10', 86, 55.5, N'graphic', 45603792.82, 91293091.72, 6, N'print');
+insert into painting (id_artist, title, year_painted, width, height, drawing_technique, price_sell, price_bought, number_copies, type_painting) values 
+	(1003, 'eu interdum eu tincidunt', '1959-01-10', 86, 55.5, N'graphic', null, 1712789.50, 1, N'original');
+insert into painting (id_artist, title, year_painted, width, height, drawing_technique, price_sell, price_bought, number_copies, type_painting) values 
+	(1004, 'integer aliquet massa', '1992-03-31', 86, 55.5, N'graphic', 32426983.29, 29875392.18, 6, N'original');
 
 --still_life_painting
 insert into still_life_painting (id_painting) values(100000);
@@ -169,3 +169,7 @@ insert into painting_shoppingcart(id_painting, id_cart) values (100001,1);
 insert into painting_shoppingcart(id_painting, id_cart) values (100002,2);
 insert into painting_shoppingcart(id_painting, id_cart) values (100003,3);
 insert into painting_shoppingcart(id_painting, id_cart) values (100004,4);
+
+--exhibition_hall_painting
+insert into exhibition_hall_painting (id_painting, id_exhibition, id_hall) values (100000, 1004, 1004);
+insert into exhibition_hall_painting (id_painting, id_exhibition, id_hall) values (100001, 1003, 1009);
