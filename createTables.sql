@@ -116,13 +116,13 @@ CREATE TABLE genre_painting
 CREATE TABLE portrait_art
 (
 	id_painting INT NOT NULL,
-	portrayed   VARCHAR(30) NOT NULL
+	portrayed   VARCHAR(30)
 );
 
 CREATE TABLE history_painting
 (
 	id_painting      INT NOT NULL,
-	historical_event VARCHAR(30) NOT NULL
+	historical_event VARCHAR(30)
 );
 
 CREATE TABLE painting_shoppingcart

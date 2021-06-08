@@ -18,7 +18,6 @@ insert into artist (first_name, last_name, country, date_of_birth, date_of_death
 insert into artist (first_name, last_name, country, date_of_birth, date_of_death) values ('Garrett', 'Godier', 'Mexico', null, null);
 
 --customer
-
 insert into customer (first_name, last_name, passwd, phone, email, address) values ('Kelley', 'Beed', 'ZvZfzbV4Cbv', '8377265909', 'kbeed0@ebay.com', '6253 Roth Center');
 insert into customer (first_name, last_name, passwd, phone, email, address) values ('Whittaker', 'Wieprecht', 'nb4ddZNq', '2904500000', 'wwieprecht1@whitehouse.gov', '3799 Graedel Street');
 insert into customer (first_name, last_name, passwd, phone, email, address) values ('Inna', 'Strickland', '80qTcC', '4394297976', 'istrickland2@redcross.org', '7 Prairie Rose Junction');
@@ -45,7 +44,6 @@ insert into customer (first_name, last_name, passwd, phone, email, address) valu
 insert into customer (first_name, last_name, passwd, phone, email, address) values ('Ricki', 'Darlison', 'Xn7vKeB2', '6285731617', 'rdarlisono@globo.com', '7 Stoughton Court');
 
 --payment
-
 insert into payment (cardNo, owner_firstname, owner_lastname, expiration_date) values ('301771555836', 'Cristy', 'Kitchen', '2020-10-28');
 insert into payment (cardNo, owner_firstname, owner_lastname, expiration_date) values ('358146446840', 'Freddy', 'Moyles', '2020-06-29');
 insert into payment (cardNo, owner_firstname, owner_lastname, expiration_date) values ('560221625665', 'Othelia', 'Waterstone', '2020-12-13');
@@ -55,7 +53,6 @@ insert into payment (cardNo, owner_firstname, owner_lastname, expiration_date) v
 insert into payment (cardNo, owner_firstname, owner_lastname, expiration_date) values ('560222046426', 'Paquito', 'Deboo', '2021-03-26');
 
 --exhibition
-
 insert into exhibition (name_exhibition, date_starting, date_ending, price_ticket) values ('vitae ipsum aliquam', '2020-08-24', '2021-01-14', 10.02);
 insert into exhibition (name_exhibition, date_starting, date_ending, price_ticket) values ('sapien', '2020-11-10', '2020-12-10', 2.69);
 insert into exhibition (name_exhibition, date_starting, date_ending, price_ticket) values ('mattis egestas', '2021-05-27', '2021-12-13', 19.55);
@@ -65,7 +62,6 @@ insert into exhibition (name_exhibition, date_starting, date_ending, price_ticke
 insert into exhibition (name_exhibition, date_starting, date_ending, price_ticket) values ('dapibus', '2020-08-15', '2021-05-27', 52.99);
 
 --exhibition_hall
-
 insert into exhibition_hall (id_exhibition, floor, capacity) values (1000, 1, 13);
 insert into exhibition_hall (id_exhibition, floor, capacity) values (1003, 0, 12);
 insert into exhibition_hall (id_exhibition, floor, capacity) values (1004, 2, 14);
@@ -74,11 +70,10 @@ insert into exhibition_hall (id_exhibition, floor, capacity) values (1004, 0, 1)
 insert into exhibition_hall (id_exhibition, floor, capacity) values (1000, 3, 8);
 insert into exhibition_hall (id_exhibition, floor, capacity) values (1003, 1, 6);
 insert into exhibition_hall (id_exhibition, floor, capacity) values (1003, 3, 16);
-insert into exhibition_hall (id_exhibition, floor, capacity) values (1005, 0, 6);
+insert into exhibition_hall (id_exhibition, floor, capacity) values (1005, 1, 6);
 insert into exhibition_hall (id_exhibition, floor, capacity) values (1006, 2, 5);
 
 --ticket
-
 insert into ticket (id_exhibition, date, type) values (1000, '2020-12-28', N'adult');
 insert into ticket (id_exhibition, date, type) values (1003, '2021-01-30', N'adult');
 insert into ticket (id_exhibition, date, type) values (1005, '2021-01-09', N'adult');
@@ -91,20 +86,18 @@ insert into ticket (id_exhibition, date, type) values (1004, '2020-06-11', N'eld
 insert into ticket (id_exhibition, date, type) values (1005, '2021-03-05', N'elder');
 
 --shopping_cart
-
-insert into shopping_cart (id_customer, quantity, total_price) values (1015, 0, 0);
-insert into shopping_cart (id_customer, quantity, total_price) values (1016, 0, 0);
-insert into shopping_cart (id_customer, quantity, total_price) values (1017, 0, 0);
-insert into shopping_cart (id_customer, quantity, total_price) values (1018, 0, 0);
-insert into shopping_cart (id_customer, quantity, total_price) values (1019, 0, 0);
-insert into shopping_cart (id_customer, quantity, total_price) values (1020, 0, 0);
-insert into shopping_cart (id_customer, quantity, total_price) values (1021, 0, 0);
-insert into shopping_cart (id_customer, quantity, total_price) values (1022, 0, 0);
-insert into shopping_cart (id_customer, quantity, total_price) values (1023, 0, 0);
-insert into shopping_cart (id_customer, quantity, total_price) values (1024, 0, 0);
+insert into shopping_cart (id_customer, quantity, total_price) values (1000, 0, 0);
+insert into shopping_cart (id_customer, quantity, total_price) values (1001, 0, 0);
+insert into shopping_cart (id_customer, quantity, total_price) values (1002, 0, 0);
+insert into shopping_cart (id_customer, quantity, total_price) values (1003, 0, 0);
+insert into shopping_cart (id_customer, quantity, total_price) values (1004, 0, 0);
+insert into shopping_cart (id_customer, quantity, total_price) values (1005, 0, 0);
+insert into shopping_cart (id_customer, quantity, total_price) values (1006, 0, 0);
+insert into shopping_cart (id_customer, quantity, total_price) values (1007, 0, 0);
+insert into shopping_cart (id_customer, quantity, total_price) values (1008, 0, 0);
+insert into shopping_cart (id_customer, quantity, total_price) values (1009, 0, 0);
 
 --orders
-
 insert into orders (cardNo, id_cart, ord_date, status) values ('301771555836', 1,  '2021-04-06', N'completed');
 insert into orders (cardNo, id_cart, ord_date, status) values ('358146446840', 2,  '2020-12-17', N'completed');
 insert into orders (cardNo, id_cart, ord_date, status) values ('560221625665', 3,  '2021-03-11', N'completed');
@@ -117,7 +110,6 @@ insert into orders (cardNo, id_cart, ord_date, status) values ('358146446840', 9
 insert into orders (cardNo, id_cart, ord_date, status) values ('560222046426', 10, '2020-08-13', N'completed');
 
 --painting
-
 insert into painting (id_artist, id_hall, title, year_painted, width, height, drawing_technique, price_sell, price_bought, number_copies, type_painting) values 
 	(1000, 1000, 'non velit donec', '1970-04-11', 86, 55.5, N'oil', 21045979.19, 43458094.75, 2, N'reproduction');
 insert into painting (id_artist, id_hall, title, year_painted, width, height, drawing_technique, price_sell, price_bought, number_copies, type_painting) values 
@@ -151,27 +143,29 @@ insert into still_life_painting (id_painting) values(100001);
 insert into still_life_painting (id_painting) values(100002);
 insert into still_life_painting (id_painting) values(100003);
 
-
 --landscape_painting
-insert into landscape_painting (id_artist) values(100004);
-insert into landscape_painting (id_artist) values(100005);
-insert into landscape_painting (id_artist) values(100006);
+insert into landscape_painting (id_painting) values(100004);
+insert into landscape_painting (id_painting) values(100005);
+insert into landscape_painting (id_painting) values(100006);
 
 --genre_painting
-insert into genre_painting (id_artist) values(100007);
-insert into genre_painting (id_artist) values(100008);
-insert into genre_painting (id_artist) values(100009);
+insert into genre_painting (id_painting) values(100007);
+insert into genre_painting (id_painting) values(100008);
+insert into genre_painting (id_painting) values(100009);
 
 --portrait_art
-insert into portrait_art (id_artist) values(100001);
-insert into portrait_art (id_artist) values(100002);
-insert into portrait_art (id_artist) values(100003);
+insert into portrait_art (id_painting) values(100001);
+insert into portrait_art (id_painting) values(100002);
+insert into portrait_art (id_painting) values(100003);
 
 --history_painting
-insert into history_painting (id_artist) values(100003);
-insert into history_painting (id_artist) values(100004);
-insert into history_painting (id_artist) values(100005);
-
+insert into history_painting (id_painting) values(100003);
+insert into history_painting (id_painting) values(100004);
+insert into history_painting (id_painting) values(100005);
 
 --painting_shoppingcart
---insert into painting_shoppingcart(id_painting, id_cart) values () 
+insert into painting_shoppingcart(id_painting, id_cart) values (100000,1);
+insert into painting_shoppingcart(id_painting, id_cart) values (100001,1);
+insert into painting_shoppingcart(id_painting, id_cart) values (100002,2);
+insert into painting_shoppingcart(id_painting, id_cart) values (100003,3);
+insert into painting_shoppingcart(id_painting, id_cart) values (100004,4);
