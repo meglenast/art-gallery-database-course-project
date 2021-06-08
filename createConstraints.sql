@@ -15,7 +15,7 @@ ALTER TABLE artist
 
 ALTER TABLE artist
 	ADD CONSTRAINT ch_artist_time_period 
-		CHECK (time_period in (N'MiddleAge', N'Renaissance', N'18thCentury', N'19thCentury', N'20thCebtury', N'21thCentury'));
+		CHECK (time_period in (N'MiddleAge', N'Renaissance', N'18thCentury', N'19thCentury', N'20thCentury', N'21thCentury', N'Other'));
 
 --customer
 ALTER TABLE customer
