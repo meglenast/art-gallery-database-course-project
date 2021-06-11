@@ -68,3 +68,69 @@ CREATE TRIGGER ains_picture_hall
 --select * from exhibition_hall_painting;
 --insert into exhibition_hall_painting (id_painting, id_exhibition, id_hall) values (100002,1004,1004);
 
+--3. Afer insert in relation orders, checks wheather the card associated with the cardNo is valid.
+--If not the trigger function sets the order's status as N'declined' otherwise sets the order's status as N'compleated'
+CREATE FUNCTION trig_fnc_set_order_status()
+RETURNS TRIGGER
+LANGUAGE plpgsql
+AS
+$$
+DECLARE
+	card_exp_date DATE;
+BEGIN
+	SELECT expiration_date expiration_date
+	INTO card_exp_date
+	FROM payment p JOIN orders o ON p.CardNo = o.CardNo
+	WHERE o.id_order = NEW.id_order;
+	
+	IF card_exp_date < CURRENT_DATE THEN
+		UPDATE orders SET status = N'declined' WHERE id_order = NEW.id_order;
+	ELSE
+		UPDATE orders SET status = N'completed' WHERE id_order = NEW.id_order;
+	END IF;
+	RETURN NEW;
+END;
+$$;
+
+CREATE TRIGGER ains_orders
+	AFTER INSERT
+	ON orders
+	FOR ROW
+	EXECUTE PROCEDURE trig_fnc_set_order_status();
+
+--4. Before insert in relation orders, checks wheather the cart associated with the id_cart is already add as order with status  N'compleated'.
+--If it is the trigger does not add new order.
+CREATE OR REPLACE FUNCTION trig_fnc_ins_order()
+RETURNS TRIGGER
+LANGUAGE plpgsql
+AS
+$$
+DECLARE
+	been_completed BOOL;
+BEGIN
+	SELECT *
+	INTO been_completed
+	FROM fnc_exist_order_for_cart(NEW.id_cart);
+	
+	IF been_completed = TRUE THEN
+		RAISE EXCEPTION '% The order assosiated with this shopping cart is already completed', NEW.id_cart;
+		RETURN NULL;
+	END IF;
+	RETURN NEW;
+END;
+$$;
+DROP TRIGGER IF EXISTS bins_orders ON orders;
+CREATE TRIGGER bins_orders
+	BEFORE INSERT
+	ON orders
+	FOR ROW
+	EXECUTE PROCEDURE trig_fnc_ins_order();
+--select * from orders ;
+--insert into orders (cardNo, id_cart, ord_date) values ('304596354637', 4, '2020-08-13');
+
+select * from payment;
+select * from orders;
+	
+select exist(id_order)
+from orders
+where id_order = 11;
