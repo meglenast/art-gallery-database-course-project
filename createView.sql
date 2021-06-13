@@ -76,3 +76,10 @@ WHERE o.status = N'completed'
 GROUP BY a.id_artist;
 
 --SELECT * FROM v_artist_num_paintings_stat;
+CREATE VIEW v_succesful_orders_info AS
+SELECT id_order, o.id_cart, ord_date AS date, string_agg(title, ',') AS products
+FROM orders o JOIN shopping_cart sc ON o.id_cart = sc.id_cart
+			JOIN painting_shoppingcart ps ON sc.id_cart = ps.id_cart
+			JOIN painting p ON p.id_painting = ps.id_painting
+WHERE status = 'completed'
+GROUP BY(id_order,o.id_cart);
