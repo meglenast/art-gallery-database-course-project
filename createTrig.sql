@@ -38,7 +38,7 @@ CREATE TRIGGER ains_artis
 --SELECT * FROM ARTIST;
 --insert into artist (first_name, last_name, country, date_of_birth, date_of_death) values ('Adria', 'Aguirrezabal', 'Thailand', '1951-05-02', '1964-12-22');
 
---2. After insert checks if whether the picture can be inserted in the sertain exhibition and hall
+--2. After insert checks  whether the picture can be inserted in the certain exhibition and hall
 --If not triggers a function which deletes the row.
 CREATE FUNCTION trig_fnc_set_picture_in_hall()
 RETURNS TRIGGER
@@ -128,9 +128,5 @@ CREATE TRIGGER bins_orders
 --select * from orders ;
 --insert into orders (cardNo, id_cart, ord_date) values ('304596354637', 4, '2020-08-13');
 
-select * from payment;
-select * from orders;
-	
-select exist(id_order)
-from orders
-where id_order = 11;
+--select * from payment;
+--select * from orders;
