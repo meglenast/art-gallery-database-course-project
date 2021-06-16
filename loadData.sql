@@ -44,13 +44,21 @@ insert into customer (first_name, last_name, passwd, phone, email, address) valu
 insert into customer (first_name, last_name, passwd, phone, email, address) values ('Ricki', 'Darlison', 'Xn7vKeB2', '6285731617', 'rdarlisono@globo.com', '7 Stoughton Court');
 
 --payment
-insert into payment (cardNo, owner_firstname, owner_lastname, expiration_date) values ('301771555836', 'Cristy', 'Kitchen', '2020-10-28');
-insert into payment (cardNo, owner_firstname, owner_lastname, expiration_date) values ('358146446840', 'Freddy', 'Moyles', '2020-06-29');
-insert into payment (cardNo, owner_firstname, owner_lastname, expiration_date) values ('560221625665', 'Othelia', 'Waterstone', '2020-12-13');
-insert into payment (cardNo, owner_firstname, owner_lastname, expiration_date) values ('304596354637', 'Honey', 'Brodie', '2021-11-15');
-insert into payment (cardNo, owner_firstname, owner_lastname, expiration_date) values ('356542895699', 'Cindee', 'Coltart', '2021-04-27');
-insert into payment (cardNo, owner_firstname, owner_lastname, expiration_date) values ('355580774073', 'Debera', 'Laxen', '2021-09-07');
-insert into payment (cardNo, owner_firstname, owner_lastname, expiration_date) values ('560222046426', 'Paquito', 'Deboo', '2021-03-26');
+insert into payment (cardNo, owner_firstname, owner_lastname, expiration_date, balance) values ('301771555836', 'Cristy', 'Kitchen', '2020-10-28', 10000020.00);
+insert into payment (cardNo, owner_firstname, owner_lastname, expiration_date, balance) values ('358146446840', 'Freddy', 'Moyles', '2023-06-29', 798575354.00);
+insert into payment (cardNo, owner_firstname, owner_lastname, expiration_date, balance) values ('560221625665', 'Othelia', 'Waterstone', '2023-12-13', 7906855235.00);
+insert into payment (cardNo, owner_firstname, owner_lastname, expiration_date, balance) values ('304596354637', 'Honey', 'Brodie', '2023-11-15',980.00);
+insert into payment (cardNo, owner_firstname, owner_lastname, expiration_date, balance) values ('356542895699', 'Cindee', 'Coltart', '2021-04-27', 988685354.00);
+insert into payment (cardNo, owner_firstname, owner_lastname, expiration_date, balance) values ('355580774073', 'Debera', 'Laxen', '2023-09-07', 0.00);
+insert into payment (cardNo, owner_firstname, owner_lastname, expiration_date, balance) values ('560222046426', 'Paquito', 'Deboo', '2021-03-26', 795435874.00);
+
+--insert into payment (cardNo, owner_firstname, owner_lastname, expiration_date, balance) values ('301771555836', 'Cristy', 'Kitchen', '2023-10-28', 1000000000.00);
+--insert into payment (cardNo, owner_firstname, owner_lastname, expiration_date, balance) values ('358146446840', 'Freddy', 'Moyles', '2023-06-29', 79868574000.00);
+--insert into payment (cardNo, owner_firstname, owner_lastname, expiration_date, balance) values ('560221625665', 'Othelia', 'Waterstone', '2023-12-13', 7906857400.00);
+--insert into payment (cardNo, owner_firstname, owner_lastname, expiration_date, balance) values ('304596354637', 'Honey', 'Brodie', '2023-11-15',9800000000.00);
+--insert into payment (cardNo, owner_firstname, owner_lastname, expiration_date, balance) values ('356542895699', 'Cindee', 'Coltart', '2023-04-27', 98868574.00);
+--insert into payment (cardNo, owner_firstname, owner_lastname, expiration_date, balance) values ('355580774073', 'Debera', 'Laxen', '2023-09-07', 100000000.00);
+--insert into payment (cardNo, owner_firstname, owner_lastname, expiration_date, balance) values ('560222046426', 'Paquito', 'Deboo', '2023-03-26', 798747987497.00);
 
 --exhibition
 insert into exhibition (name_exhibition, date_starting, date_ending, price_ticket) values ('vitae ipsum aliquam', '2020-08-24', '2021-01-14', 10.02);
@@ -115,27 +123,27 @@ insert into painting (id_artist, title, year_painted, width, height, drawing_tec
 insert into painting (id_artist, title, year_painted, width, height, drawing_technique, price_sell, price_bought, number_copies, type_painting) values 
 	(1002, 'augue a suscipit', '1965-01-10', 86, 55.5, N'oil', null, 72155798.03, 3, N'reproduction');
 insert into painting (id_artist, title, year_painted, width, height, drawing_technique, price_sell, price_bought, number_copies, type_painting) values 
-	(1003, 'vehicula consequat morbi', '1965-01-10', 86, 55.5, N'acryl', 67386132.13, 61720208.37, 6, N'print');
+	(1003, 'vehicula consequat morbi', '1965-01-10', 86, 55.5, N'acryl', 67132.13, 61727.37, 6, N'print');
 insert into painting (id_artist, title, year_painted, width, height, drawing_technique, price_sell, price_bought, number_copies, type_painting) values 
-	(1004, 'aenean fermentum', '1991-07-31', 86, 55.5, N'oil', 47005917.38, 61102821.58, 3, N'reproduction');
+	(1004, 'aenean fermentum', '1991-07-31', 86, 55.5, N'oil', 47017.38, 61121.58, 3, N'reproduction');
 insert into painting (id_artist, title, year_painted, width, height, drawing_technique, price_sell, price_bought, number_copies, type_painting) values 
-	(1005, 'vulputate', null, 86, 55.5, N'acryl', 68210849.62, 36597531.20, 6, N'print');
+	(1005, 'vulputate', null, 86, 55.5, N'acryl', 68849.62, 365971.20, 6, N'print');
 insert into painting (id_artist, title, year_painted, width, height, drawing_technique, price_sell, price_bought, number_copies, type_painting) values 
-	(1006, 'donec dapibus duis', null, 86, 55.5, N'acryl', 34913898.00, 6854079.27, 4, N'reproduction');
+	(1006, 'donec dapibus duis', null, 86, 55.5, N'acryl', 349138.00, 68579.27, 4, N'reproduction');
 insert into painting (id_artist, title, year_painted, width, height, drawing_technique, price_sell, price_bought, number_copies, type_painting) values 
-	(1007, 'ut at dolor quis', null, 86, 55.5, N'acryl', 6890810.86, 25855014.50, 4, N'reproduction');
+	(1007, 'ut at dolor quis', null, 86, 55.5, N'acryl', 68900.86, 258514.50, 4, N'reproduction');
 insert into painting (id_artist, title, year_painted, width, height, drawing_technique, price_sell, price_bought, number_copies, type_painting) values 
-	(1008, 'at ipsum ac tellus', null, 86, 55.5, N'sketch', 69039674.83, 33758576.76, 1, N'original');
+	(1008, 'at ipsum ac tellus', null, 86, 55.5, N'sketch', 690396.83, 337585.76, 1, N'original');
 insert into painting (id_artist, title, year_painted, width, height, drawing_technique, price_sell, price_bought, number_copies, type_painting) values 
-	(1009, 'integer tincidunt ante vel', null, 86, 55.5, N'sketch', 41484145.02, 24774960.87, 1, N'original');
+	(1009, 'integer tincidunt ante vel', null, 86, 55.5, N'sketch', 414841.02, 24778.87, 1, N'original');
 insert into painting (id_artist, title, year_painted, width, height, drawing_technique, price_sell, price_bought, number_copies, type_painting) values 
 	(1001, 'amet lobortis', null, 86, 55.5, N'graphic', 400, 416, 2, N'reproduction');
 insert into painting (id_artist, title, year_painted, width, height, drawing_technique, price_sell, price_bought, number_copies, type_painting) values 
-	(1002, 'nunc', '1954-01-10', 86, 55.5, N'graphic', 45603792.82, 91293091.72, 6, N'print');
+	(1002, 'nunc', '1954-01-10', 86, 55.5, N'graphic', 45692.82, 912931.72, 6, N'print');
 insert into painting (id_artist, title, year_painted, width, height, drawing_technique, price_sell, price_bought, number_copies, type_painting) values 
-	(1003, 'eu interdum eu tincidunt', '1959-01-10', 86, 55.5, N'graphic', null, 1712789.50, 1, N'original');
+	(1003, 'eu interdum eu tincidunt', '1959-01-10', 86, 55.5, N'graphic', null, 17129.50, 1, N'original');
 insert into painting (id_artist, title, year_painted, width, height, drawing_technique, price_sell, price_bought, number_copies, type_painting) values 
-	(1004, 'integer aliquet massa', '1992-03-31', 86, 55.5, N'graphic', 32426983.29, 29875392.18, 6, N'original');
+	(1004, 'integer aliquet massa', '1992-03-31', 86, 55.5, N'graphic', 324263.29, 298753.18, 6, N'original');
 
 --still_life_painting
 insert into still_life_painting (id_painting) values(100000);

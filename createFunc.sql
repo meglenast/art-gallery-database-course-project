@@ -85,3 +85,65 @@ BEGIN
 	END IF;
 END;
 $$;
+
+--4. Returns the table with all unlogged failed orders
+CREATE OR REPLACE FUNCTION fnc_unlogged_orders()
+RETURNS TABLE(
+	id_order INT,
+	cardNo CHAR(12),
+	id_card INT,
+	ord_date DATE,
+	status CHAR(9)
+)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+	RETURN QUERY
+		SELECT o.id_order, o.cardNo, o.id_cart, o.ord_date, o.status
+		FROM orders o LEFT JOIN log_table_declined_orders l ON o.id_order = l.id_order
+		WHERE l.id_order IS NULL AND o.status = N'declined';
+END;
+$$;
+
+--select * from fnc_unlogged_orders();
+
+--5. Returns card's expiration date by  passing card's number
+CREATE OR REPLACE FUNCTION fnc_get_exp_date_card(card_no CHAR(12))
+RETURNS DATE
+LANGUAGE plpgsql
+AS $$
+DECLARE
+exp_date DATE;
+BEGIN
+	SELECT expiration_date
+	INTO exp_date
+	FROM payment
+	WHERE payment.cardNo = card_no;
+	
+	RETURN exp_date;
+END;
+$$;
+--select * from fnc_get_exp_date_card('301771555836');
+--select * from payment;
+
+
+--6. Returns card's balance by  passing card's number
+CREATE OR REPLACE FUNCTION fnc_get_balance_card(card_no CHAR(12))
+RETURNS INT
+LANGUAGE plpgsql
+AS $$
+DECLARE
+curr_balance NUMERIC(15,2);
+BEGIN
+	SELECT balance
+	INTO curr_balance
+	FROM payment
+	WHERE payment.cardNo = card_no;
+	
+	RETURN curr_balance;
+END;
+$$;
+
+
+--select * from fnc_get_balance_card('301771555836');
+--select * from payment;

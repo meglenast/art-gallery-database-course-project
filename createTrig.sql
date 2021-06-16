@@ -69,24 +69,33 @@ CREATE TRIGGER ains_picture_hall
 --insert into exhibition_hall_painting (id_painting, id_exhibition, id_hall) values (100002,1004,1004);
 
 --3. Afer insert in relation orders, checks wheather the card associated with the cardNo is valid.
---If not the trigger function sets the order's status as N'declined' otherwise sets the order's status as N'compleated'
-CREATE FUNCTION trig_fnc_set_order_status()
+--If not the trigger function sets the order's status as N'declined' otherwise sets the order's status as N'completed'
+CREATE OR REPLACE FUNCTION trig_fnc_set_order_status()
 RETURNS TRIGGER
 LANGUAGE plpgsql
 AS
 $$
 DECLARE
+	card_no       CHAR(12);
 	card_exp_date DATE;
+	curr_balance  NUMERIC(15,2);
+	curr_price    NUMERIC(15,2);
 BEGIN
-	SELECT expiration_date expiration_date
-	INTO card_exp_date
+	SELECT p.cardNo, expiration_date, balance
+	INTO card_no, card_exp_date, curr_balance
 	FROM payment p JOIN orders o ON p.CardNo = o.CardNo
 	WHERE o.id_order = NEW.id_order;
 	
-	IF card_exp_date < CURRENT_DATE THEN
+	SELECT total_price
+	INTO curr_price
+	FROM shopping_cart sc JOIN orders o ON sc.id_cart = o.id_cart
+	WHERE o.id_order = NEW.id_order;
+	
+	IF card_exp_date < CURRENT_DATE OR curr_price > curr_balance THEN
 		UPDATE orders SET status = N'declined' WHERE id_order = NEW.id_order;
 	ELSE
 		UPDATE orders SET status = N'completed' WHERE id_order = NEW.id_order;
+		UPDATE payment SET balance = balance - curr_price WHERE cardNo = card_no;
 	END IF;
 	RETURN NEW;
 END;
@@ -97,6 +106,8 @@ CREATE TRIGGER ains_orders
 	ON orders
 	FOR ROW
 	EXECUTE PROCEDURE trig_fnc_set_order_status();
+
+--DROP TRIGGER IF EXISTS ains_orders ON orders;
 
 --4. Before insert in relation orders, checks wheather the cart associated with the id_cart is already add as order with status  N'compleated'.
 --If it is the trigger does not add new order.
@@ -119,7 +130,7 @@ BEGIN
 	RETURN NEW;
 END;
 $$;
-DROP TRIGGER IF EXISTS bins_orders ON orders;
+--DROP TRIGGER IF EXISTS bins_orders ON orders;
 CREATE TRIGGER bins_orders
 	BEFORE INSERT
 	ON orders
@@ -130,3 +141,59 @@ CREATE TRIGGER bins_orders
 
 --select * from payment;
 --select * from orders;
+
+-- 5. When inserted a new row in painting_shoppingcart
+CREATE OR REPLACE FUNCTION trig_fnc_ains_painting_shoppingcart()
+RETURNS TRIGGER
+LANGUAGE plpgsql
+AS
+$$
+DECLARE
+	curr_price NUMERIC(10,2);
+BEGIN
+	SELECT price_sell
+	INTO curr_price
+	FROM painting p 
+	WHERE p.id_painting = NEW.id_painting;
+	
+	UPDATE shopping_cart SET total_price = total_price + curr_price WHERE id_cart = NEW.id_cart;	
+	UPDATE shopping_cart SET quantity    = quantity    + 1          WHERE id_cart = NEW.id_cart;
+		
+	RETURN NEW;
+END;
+$$;
+
+CREATE TRIGGER ains_painting_shoppingcart
+	AFTER INSERT
+	ON painting_shoppingcart
+	FOR ROW
+	EXECUTE PROCEDURE trig_fnc_ains_painting_shoppingcart();
+
+--DROP TRIGGER IF EXISTS ains_painting_shoppingcart ON orders;
+
+-- 6. When deleted a row in painting_shoppingcart
+CREATE OR REPLACE FUNCTION trig_fnc_adel_painting_shoppingcart()
+RETURNS TRIGGER
+LANGUAGE plpgsql
+AS
+$$
+DECLARE
+	curr_price NUMERIC(10,2);
+BEGIN
+	SELECT price_sell
+	INTO curr_price
+	FROM painting p 
+	WHERE p.id_painting = OLD.id_painting;
+	
+	UPDATE shopping_cart SET total_price = total_price - curr_price WHERE id_cart = NEW.id_cart;	
+	UPDATE shopping_cart SET quantity    = quantity    - 1          WHERE id_cart = NEW.id_cart;
+		
+	RETURN NEW;
+END;
+$$;
+
+CREATE TRIGGER adel_painting_shoppingcart
+	AFTER DELETE
+	ON painting_shoppingcart
+	FOR ROW
+	EXECUTE PROCEDURE trig_fnc_adel_painting_shoppingcart();

@@ -25,7 +25,7 @@ CREATE TABLE shopping_cart
 	id_cart     INT GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1),
 	id_customer INT NOT NULL,
 	quantity    SMALLINT, 
-	total_price NUMERIC(9,2)
+	total_price NUMERIC(10,2)
 );
 
 CREATE TABLE payment
@@ -33,7 +33,8 @@ CREATE TABLE payment
 	cardNo CHAR(12) NOT NULL,
 	owner_firstname VARCHAR(30) NOT NULL,
 	owner_lastname  VARCHAR(30) NOT NULL,
-	expiration_date DATE NOT NULL
+	expiration_date DATE NOT NULL,
+	balance			NUMERIC(15,2) NOT NULL
 );
 
 CREATE TABLE exhibition
@@ -125,4 +126,11 @@ CREATE TABLE exhibition_hall_painting
 	id_painting   INT NOT NULL,
 	id_exhibition INT NOT NULL,
 	id_hall       INT NOT NULL
+);
+
+CREATE TABLE log_table_declined_orders
+(
+	id  INT GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1),
+	id_order INT NOT NULL,
+	log_info CHAR(40)
 );

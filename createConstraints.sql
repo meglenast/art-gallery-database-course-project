@@ -61,6 +61,9 @@ ALTER TABLE payment
 ALTER TABLE payment
 	ADD CONSTRAINT ch_payment_owner_lastname CHECK(owner_lastname SIMILAR TO '[A-Z][a-z]+%');
 
+ALTER TABLE payment
+	ADD CONSTRAINT ch_payemnt_balance CHECK(balance >= 0);
+	
 --exhibition
 ALTER TABLE exhibition
     ADD CONSTRAINT pk_exhibition PRIMARY KEY (id_exhibition);
@@ -189,3 +192,6 @@ ALTER TABLE exhibition_hall_painting
 
 ALTER TABLE exhibition_hall_painting
 	ADD CONSTRAINT fk_exhibition_hall_painting_exhibition  FOREIGN KEY (id_exhibition) REFERENCES exhibition(id_exhibition);
+--log_table_declined_orders
+ALTER TABLE log_table_declined_orders
+	ADD CONSTRAINT pk_log_table_declined_orders PRIMARY KEY (id);
