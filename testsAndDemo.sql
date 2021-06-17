@@ -70,3 +70,58 @@ select * from  orders;
 select * from  fnc_unlogged_orders()
 call proc_log_failed_orders();
 select * from log_table_declined_orders;
+
+--Triggers
+
+--1. ains_artis
+--Let's see artist table so far
+select * from artist;
+--Let's insert a new artist 
+insert into artist (first_name, last_name, country, date_of_birth, date_of_death) values 
+	('First', 'First', 'First', '1550-05-02', '1610-05-02');
+--Let's insert one more artist 
+insert into artist (first_name, last_name, country, date_of_birth, date_of_death) values 
+	('Second', 'Second', 'Second', '1850-05-02', '1900-05-02');
+	
+--2. ains_picture_hall
+
+--Let's see
+select * from exhibition_hall_painting;
+--Can't add in a full exhibition hall
+select * from exhibition_hall where id_hall = 1004;
+insert into exhibition_hall_painting (id_painting, id_exhibition, id_hall) values (100002,1004,1004);
+	
+--3. ains_orders
+
+--Let's see 
+select * from orders;
+--Ex1. expired card
+select* from payment where  cardno = '301771555836';
+insert into orders (cardNo, id_cart, ord_date) values ('301771555836', 10, '2021-06-13');
+select * from orders;
+
+--Ex2. low balance
+select* from payment where  cardno = '355580774073';
+insert into orders (cardNo, id_cart, ord_date) values ('355580774073', 4, '2021-06-13');
+select * from orders;
+
+--Ex3 succesfull order
+select* from payment where  cardno = '355580774073';
+insert into orders (cardNo, id_cart, ord_date) values ('355580774073', 10, '2021-06-13');
+select * from orders;
+
+--4. bins_orders
+select * from orders ;
+select * from payment;
+insert into orders (cardNo, id_cart, ord_date) values ('304596354637', 4, '2020-08-13');
+
+--5. ains_painting_shoppingcart
+select * from painting_shoppingcart;
+select * from shopping_cart where id_cart = 5;
+insert into painting_shoppingcart(id_painting, id_cart) values (100004,5);
+
+--6. adel_painting_shoppingcar
+
+select * from painting_shoppingcart;
+delete from painting_shoppingcart where id = 8;
+select * from shopping_cart where id_cart = 5;

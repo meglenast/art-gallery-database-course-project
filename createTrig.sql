@@ -35,24 +35,22 @@ CREATE TRIGGER ains_artis
 	FOR ROW
 	EXECUTE PROCEDURE trig_fnc_set_timeperiod();
 	
---SELECT * FROM ARTIST;
---insert into artist (first_name, last_name, country, date_of_birth, date_of_death) values ('Adria', 'Aguirrezabal', 'Thailand', '1951-05-02', '1964-12-22');
-
 --2. After insert checks  whether the picture can be inserted in the certain exhibition and hall
 --If not triggers a function which deletes the row.
-CREATE FUNCTION trig_fnc_set_picture_in_hall()
+CREATE OR REPLACE FUNCTION trig_fnc_set_picture_in_hall()
 RETURNS TRIGGER
 LANGUAGE plpgsql
 AS
 $$
 DECLARE
-	id_exhibition INTEGER;
-	id_hall INTEGER;
+	exist_exhibiton_hall INTEGER;
 BEGIN
-		SELECT NEW.id_exhibition INTO id_exhibition;
-		SELECT NEW.id_hall INTO id_hall;
+		SELECT COUNT(*)
+		INTO exist_exhibiton_hall
+		FROM exhibition_hall_painting
+		WHERE id_exhibition = NEW.id_exhibition AND id_hall = NEW.id_hall;
 		
-		IF  NOT fnc_can_add_to_exhibition_hall(id_exhibition, id_hall) THEN
+		IF  NOT fnc_can_add_to_exhibition_hall(NEW.id_exhibition, NEW.id_hall) AND exist_exhibiton_hall > 1 THEN
 			DELETE FROM exhibition_hall_painting WHERE id = NEW.id;
 		END IF;
 		RETURN NEW;
@@ -65,9 +63,6 @@ CREATE TRIGGER ains_picture_hall
 	FOR ROW
 	EXECUTE PROCEDURE trig_fnc_set_picture_in_hall();
 	
---select * from exhibition_hall_painting;
---insert into exhibition_hall_painting (id_painting, id_exhibition, id_hall) values (100002,1004,1004);
-
 --3. Afer insert in relation orders, checks wheather the card associated with the cardNo is valid.
 --If not the trigger function sets the order's status as N'declined' otherwise sets the order's status as N'completed'
 CREATE OR REPLACE FUNCTION trig_fnc_set_order_status()
@@ -107,8 +102,6 @@ CREATE TRIGGER ains_orders
 	FOR ROW
 	EXECUTE PROCEDURE trig_fnc_set_order_status();
 
---DROP TRIGGER IF EXISTS ains_orders ON orders;
-
 --4. Before insert in relation orders, checks wheather the cart associated with the id_cart is already add as order with status  N'compleated'.
 --If it is the trigger does not add new order.
 CREATE OR REPLACE FUNCTION trig_fnc_ins_order()
@@ -130,17 +123,12 @@ BEGIN
 	RETURN NEW;
 END;
 $$;
---DROP TRIGGER IF EXISTS bins_orders ON orders;
+
 CREATE TRIGGER bins_orders
 	BEFORE INSERT
 	ON orders
 	FOR ROW
 	EXECUTE PROCEDURE trig_fnc_ins_order();
---select * from orders ;
---insert into orders (cardNo, id_cart, ord_date) values ('304596354637', 4, '2020-08-13');
-
---select * from payment;
---select * from orders;
 
 -- 5. When inserted a new row in painting_shoppingcart
 CREATE OR REPLACE FUNCTION trig_fnc_ains_painting_shoppingcart()
@@ -169,8 +157,6 @@ CREATE TRIGGER ains_painting_shoppingcart
 	FOR ROW
 	EXECUTE PROCEDURE trig_fnc_ains_painting_shoppingcart();
 
---DROP TRIGGER IF EXISTS ains_painting_shoppingcart ON orders;
-
 -- 6. When deleted a row in painting_shoppingcart
 CREATE OR REPLACE FUNCTION trig_fnc_adel_painting_shoppingcart()
 RETURNS TRIGGER
@@ -185,8 +171,8 @@ BEGIN
 	FROM painting p 
 	WHERE p.id_painting = OLD.id_painting;
 	
-	UPDATE shopping_cart SET total_price = total_price - curr_price WHERE id_cart = NEW.id_cart;	
-	UPDATE shopping_cart SET quantity    = quantity    - 1          WHERE id_cart = NEW.id_cart;
+	UPDATE shopping_cart SET total_price = total_price - curr_price WHERE id_cart = OLD.id_cart;	
+	UPDATE shopping_cart SET quantity    = quantity    - 1          WHERE id_cart = OLD.id_cart;
 		
 	RETURN NEW;
 END;
