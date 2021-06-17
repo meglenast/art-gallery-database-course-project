@@ -20,8 +20,6 @@ SELECT * FROM
 	order_tickets
 ORDER BY id_order;
 
---select * from v_order_products
-
 --2. The view shows categorization for the paintings with respect to their price
 CREATE VIEW v_paintings_price_category AS 
 SELECT id_painting, 
@@ -35,17 +33,13 @@ SELECT id_painting,
 FROM painting
 ORDER BY id_painting;
 
-select * from v_paintings_price_category;
-
 --3. The view shows all the paintings which have lowered their price by more than 20 percents
 CREATE  VIEW v_paintings_lower_price AS
 SELECT id_painting, price_bought, price_sell
 FROM painting
 WHERE price_sell < price_bought - (price_bought*0.2);
 
---select * from v_paintings_lower_price
-
---3. The shows for each artist their most expensive painting
+--4. The shows for each artist their most expensive painting
 CREATE  VIEW v_artist_top_painting AS
 SELECT p.id_artist, p.id_painting, p.price_bought
 FROM artist a JOIN painting p ON a.id_artist = p.id_artist 
@@ -53,20 +47,19 @@ WHERE p.price_bought = (SELECT max(price_bought)
 						 FROM painting cp
 						 WHERE p.id_painting = cp.id_painting);
 
---4.The view shows a statisc for the number of paintingsi in each price category
+--5.The view shows a statisc for the number of paintingsi in each price category
 CREATE VIEW v_paintings_price_stat AS
 SELECT (SELECT COUNT(*) 
 		FROM painting
 	   	WHERE price_bought < 1000)as low_price,
 		(SELECT COUNT(*) 
 		FROM painting
-	   	WHERE price_bought >= 1000 and price_bought < 10000)as middel_price,
+	   	WHERE price_bought >= 1000 and price_bought < 10000)as middle_price,
 		(SELECT COUNT(*) 
 		FROM painting
 	   	WHERE price_bought > 10000)as high_price;
 
---SELECT * FROM v_paintings_price_stat;
---5.The view shows a statistic for the number of paintings sold by every artist
+--6.The view shows a statistic for the number of paintings sold by every artist
 CREATE VIEW v_artist_num_paintings_stat AS
 SELECT a.id_artist, COUNT(p.id_painting) as cnt_painting
 FROM artist a JOIN painting p ON a.id_artist = p.id_artist
@@ -75,7 +68,7 @@ FROM artist a JOIN painting p ON a.id_artist = p.id_artist
 WHERE o.status = N'completed'
 GROUP BY a.id_artist;
 
---SELECT * FROM v_artist_num_paintings_stat;
+--7. The view shows all the products included to a accepted order
 CREATE VIEW v_succesful_orders_info AS
 SELECT id_order, o.id_cart, ord_date AS date, string_agg(title, ',') AS products
 FROM orders o JOIN shopping_cart sc ON o.id_cart = sc.id_cart

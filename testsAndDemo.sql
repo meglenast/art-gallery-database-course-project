@@ -125,3 +125,26 @@ insert into painting_shoppingcart(id_painting, id_cart) values (100004,5);
 select * from painting_shoppingcart;
 delete from painting_shoppingcart where id = 8;
 select * from shopping_cart where id_cart = 5;
+
+--Views
+
+--1. v_order_products
+select * from v_order_products;
+
+--2. v_paintings_price_category;
+select * from v_paintings_price_category;
+
+--3. v_paintings_lower_price
+select * from v_paintings_lower_price;
+
+--4. v_artist_top_painting
+select * from v_artist_top_painting;
+
+--5. v_paintings_price_stat
+select * from v_paintings_price_stat;
+
+--6. v_artist_num_paintings_stat
+select * from v_artist_num_paintings_stat;
+
+--7. v_succesful_orders_info
+select * from v_succesful_orders_info;
