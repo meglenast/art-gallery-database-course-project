@@ -22,11 +22,6 @@ BEGIN
 END;
 $$;
 
---drop function fnc_can_add_to_exhibition_hall;
---select * from fnc_can_add_to_exhibition_hall(1004, 1004);
---select * from fnc_can_add_to_exhibition_hall(1003, 1009);
---select * from fnc_can_add_to_exhibition_hall(1090, 1000);
-
 --2. Returns the number of pictures in a exhibition hall for a certain exhibition.
 -- The return value is 0 when there is no exhivition exsisting with the passed id_exhibition ad id_hall
 CREATE FUNCTION fnc_num_free_places_for_hall_exhibition(id_exh INT, id_h INT)
@@ -55,16 +50,8 @@ BEGIN
 END;
 $$;
 
---drop FUNCTION fnc_num_free_places_for_hall_exhibition;
---select * from exhibition_hall;
---select * from exhibition_hall_painting;
---select * from fnc_num_free_places_for_hall_exhibition(1004, 1004);
---select * from fnc_num_free_places_for_hall_exhibition(1003, 1009);
---select * from fnc_num_free_places_for_hall_exhibition(1090, 1000);
-
 --3.Checks wheather ther is such a order corresponding to the cart_id paseed 
 --which status is N'compleated';
---SELECT * FROM fnc_exist_order_for_cart(4);
 CREATE FUNCTION fnc_exist_order_for_cart(id_c INTEGER)
 RETURNS BOOLEAN
 LANGUAGE plpgsql
@@ -105,8 +92,6 @@ BEGIN
 END;
 $$;
 
---select * from fnc_unlogged_orders();
-
 --5. Returns card's expiration date by  passing card's number
 CREATE OR REPLACE FUNCTION fnc_get_exp_date_card(card_no CHAR(12))
 RETURNS DATE
@@ -123,9 +108,6 @@ BEGIN
 	RETURN exp_date;
 END;
 $$;
---select * from fnc_get_exp_date_card('301771555836');
---select * from payment;
-
 
 --6. Returns card's balance by  passing card's number
 CREATE OR REPLACE FUNCTION fnc_get_balance_card(card_no CHAR(12))
@@ -143,7 +125,3 @@ BEGIN
 	RETURN curr_balance;
 END;
 $$;
-
-
---select * from fnc_get_balance_card('301771555836');
---select * from payment;

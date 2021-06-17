@@ -192,6 +192,10 @@ ALTER TABLE exhibition_hall_painting
 
 ALTER TABLE exhibition_hall_painting
 	ADD CONSTRAINT fk_exhibition_hall_painting_exhibition  FOREIGN KEY (id_exhibition) REFERENCES exhibition(id_exhibition);
+
 --log_table_declined_orders
 ALTER TABLE log_table_declined_orders
 	ADD CONSTRAINT pk_log_table_declined_orders PRIMARY KEY (id);
+
+ALTER TABLE log_table_declined_orders
+	ADD CONSTRAINT fk_log_table_declined_orders FOREIGN KEY (id_order) REFERENCES orders(id_order);
