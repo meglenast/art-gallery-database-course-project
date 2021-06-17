@@ -64,3 +64,9 @@ select * from  payment;
 select * from fnc_get_balance_card('301771555836'); -- existing payment 
 select * from fnc_get_balance_card('111111111111'); -- nonexisting payment
 
+--Stored procedures
+
+select * from  orders;
+select * from  fnc_unlogged_orders()
+call proc_log_failed_orders();
+select * from log_table_declined_orders;

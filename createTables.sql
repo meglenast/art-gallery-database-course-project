@@ -16,7 +16,7 @@ CREATE TABLE customer
 	last_name   VARCHAR(30) NOT NULL,
 	passwd      VARCHAR(12) NOT NULL,
 	phone       VARCHAR(20) NOT NULL,
-	email       VARCHAR(40) NOT NULL,
+	email       VARCHAR(40) NOT NULL UNIQUE,
 	address     VARCHAR(50) NOT NULL
 );
 
