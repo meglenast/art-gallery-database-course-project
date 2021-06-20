@@ -125,3 +125,35 @@ BEGIN
 	RETURN curr_balance;
 END;
 $$;
+
+--7. Returns tickets price
+CREATE OR REPLACE FUNCTION fnc_get_ticket_price(id INT)
+RETURNS NUMERIC(4,2)
+LANGUAGE plpgsql
+AS $$
+DECLARE
+exh_price NUMERIC(4,2);
+curr_type CHAR(7);
+BEGIN
+	SELECT price_ticket
+	INTO exh_price
+	FROM exhibition
+	WHERE id_exhibition = (SELECT id_exhibition
+						   FROM ticket
+						   WHERE id_ticket = id);
+	
+	SELECT type
+	FROM ticket
+	INTO curr_type
+	WHERE id_ticket = id;
+	
+	CASE
+		WHEN curr_type = N'adult' THEN
+			RETURN exh_price;
+		WHEN curr_type = N'child' OR curr_type = N'elder' THEN
+			RETURN exh_price - 0.5*exh_price;
+		ELSE 
+			RETURN exh_price - 0.35*exh_price;
+	END CASE;
+END;
+$$

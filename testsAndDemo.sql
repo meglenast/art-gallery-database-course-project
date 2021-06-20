@@ -64,8 +64,14 @@ select * from  payment;
 select * from fnc_get_balance_card('301771555836'); -- existing payment 
 select * from fnc_get_balance_card('111111111111'); -- nonexisting payment
 
---Stored procedures
+--7. fnc_get_ticket_price(id INT)
+select price_ticket,type 
+from exhibition e join ticket t on e.id_exhibition = t.id_exhibition; 
 
+select * from fnc_get_ticket_price(1);
+select * from fnc_get_ticket_price(4);
+
+--Stored procedures
 select * from  orders;
 select * from  fnc_unlogged_orders()
 call proc_log_failed_orders();
@@ -148,3 +154,6 @@ select * from v_artist_num_paintings_stat;
 
 --7. v_succesful_orders_info
 select * from v_succesful_orders_info;
+
+--8. v_tickets_prices
+select * from v_tickets_prices;

@@ -76,3 +76,8 @@ FROM orders o JOIN shopping_cart sc ON o.id_cart = sc.id_cart
 			JOIN painting p ON p.id_painting = ps.id_painting
 WHERE status = 'completed'
 GROUP BY(id_order,o.id_cart);
+
+--8. The view shows tickets prices
+CREATE VIEW v_tickets_prices AS
+SELECT id_ticket, id_exhibition, date, fnc_get_ticket_price(id_ticket) AS price
+FROM ticket;
